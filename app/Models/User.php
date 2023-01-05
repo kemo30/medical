@@ -46,7 +46,11 @@ class User extends Authenticatable
     ];
 
 
-    public function tasks(){
-        return $this->hasMany(task::class,'employee_id','id');
+    public function doctor_ratings(){
+        return $this->hasMany(doctor_ratings::class,'user_id','id');
+    }
+
+    public function reservation(){
+        return $this->hasMany(Reservation::class,'user_id','id');
     }
 }
