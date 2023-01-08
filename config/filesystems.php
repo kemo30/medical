@@ -45,6 +45,10 @@ return [
             'driver' => 'local',
             'root'   => public_path() . '/services',
         ],
+        'file' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/file',
+        ],
         
     
         'media' => [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\serviceRequest;
 use App\Models\service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,15 +28,20 @@ class serviceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(serviceRequest $request)
     {
         // $path = Storage::putFile('image', $request->image);
         
        
         $data = $request->all();
-        $data['image'] = $this->SaveImg($request->image, 'image/');
+
+        $data['image'] = $this->SaveImg($request->image, 'file/');
+        $data['icon'] = $this->SaveImg($request->icon, 'file/');
+
         $service = service::create($data);
-        $service['image'] = asset('image/' . $service->image);
+
+        $service['image'] = asset('file/' . $service->image);
+        $service['icon'] = asset('file/' . $service->icon);
         return $service;
     }
 
@@ -57,10 +63,31 @@ class serviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, service $service)
+    public function update(serviceRequest $request, service $service)
     {
         $data = $request->all();
-        $data['image'] = $this->SaveImg($request->image, 'image/');
+       
+        //image chack
+        if( $request->image ){
+        $image = $this->SaveImg($request->image, 'file/');
+        $this->DeleteImg($service->image,'file');
+        }
+        else{
+        $image = $service->image;
+        }
+        // icon chack
+        if( $request->icon ){
+            $icon = $this->SaveImg($request->icon, 'file/');
+            $this->DeleteImg($service->icon,'file');
+        }
+        else{
+            $icon = $service->icon;
+        }
+
+
+        $data['image']=$image;
+        $dat['icon'] = $icon;
+        
         $service->update($data);
         return [
             'data' => 'update successfully'
@@ -76,6 +103,8 @@ class serviceController extends Controller
     public function destroy(service $service)
     {
         $service->delete();
+        $this->DeleteImg($service->image,'file');
+        
         return [
             'data' => 'delete successfully'
         ];
