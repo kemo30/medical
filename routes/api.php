@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\api\admin\projectSController;
-use App\Http\Controllers\api\admin\tasksController;
-use App\Http\Controllers\api\authTokensController;
-use App\Http\Controllers\api\employee\taskController;
+
+use App\Http\Controllers\api\admin\serviceController;
+use App\Http\Controllers\api\Auth\authTokensController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-
+Route::apiResource('/service',serviceController::class);
 
 
 

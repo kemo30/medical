@@ -24,10 +24,13 @@ class doctor extends Model
     }
 
     public function rating(){
-        return $this->hasMany(doctor_ratings::class ,'doctor_id','id');
+        return $this->hasMany(doctor_rating::class ,'doctor_id','id');
     }
 
     public function reservation(){
         return $this->hasMany(Reservation::class ,'doctor_id','id');
+    }
+    public function user(){
+        return $this->belongsTo(user::class,'user_id','id');
     }
 }

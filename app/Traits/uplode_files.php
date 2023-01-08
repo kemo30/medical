@@ -9,10 +9,7 @@ trait uplode_files{
         $file_name =$photo->getClientOriginalName();
         $file_path_name=time() .$file_name;
         $photo->move($path,$file_path_name);
-        return [
-            'path'=> $file_path_name,
-            'name' => $file_name,
-        ];
+        return  $file_path_name ;
     }
 
     function DeleteImg($photo,$path){

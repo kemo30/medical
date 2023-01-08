@@ -17,7 +17,7 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users','id')->cascadeOnDelete();
             $table->foreignId('doctor_id')->constrained('doctors','id')->cascadeOnDelete();
-            $table->foreignId('service_id')->constrained('services','id')->cascadeOnDelete();
+            $table->text('notes')->nullable();
             $table->date('date');
             $table->timestamps();
         });

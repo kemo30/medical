@@ -21,7 +21,5 @@ class service extends Model
     public function doctors(){
         return $this->hasMany(doctor::class,'service_id','id');
     }
-    public function reservation(){
-        return $this->hasMany(Reservation::class,'service_id','id');
-    }
+   
 }
