@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\api\admin\doctorController;
 use App\Http\Controllers\api\admin\serviceController;
 use App\Http\Controllers\api\Auth\authTokensController;
 use Illuminate\Http\Request;
@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('/service',serviceController::class);
+Route::apiResource('/doctor',doctorController::class);
 
 
 

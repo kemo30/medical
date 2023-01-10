@@ -17,7 +17,7 @@ class authTokensController extends Controller
          'name' => 'required',
         ]);
 
-        $user = user::where('email',$request->email)->first();
+        $user = user::where('email',$request->email)->orWhere()->first();
         
         if($user && Hash::check($request->password ,$user->password)){
             $token = $user->createToken($request->name,['*']);

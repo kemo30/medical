@@ -15,8 +15,13 @@ class doctor extends Model
         'price',
         'description_ar',
         'description_en',
-        'image',
         'service_id',
+        'image',
+        'user_id',
+        'location',
+        'address',
+        'phone_number',
+        'status',
     ];
 
     public function service(){

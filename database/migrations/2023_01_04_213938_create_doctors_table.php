@@ -14,7 +14,7 @@ class CreateDoctorsTable extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
-            $table->id();
+            $table->id('doctor_id');
             $table->foreignId('user_id')->constrained('users','id')->cascadeOnDelete();
             $table->string('name_ar');
             $table->string('name_en');
